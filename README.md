@@ -1,10 +1,24 @@
 # My Personal Project
 
-## A subtitle
+## Proposal for SleepWell
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+We always ignore our sleeping quality and sleeping time in busy life. However, sleeping is significant for every person to keep a
+healthy life. So I want to design an application to make people pay more attention on their sleeping. This application
+is called **SleepWell**.
 
-An example of text with **bold** and *italic* fonts.  
+This application can be used for analyzing the sleeping quality and helping people sleeping well.
+It can meet people's different needs for sleep:
+- For people who always stay up late to work, SleepWell can help them record their sleeping time and remind them to sleep
+  for enough time.
+- For people who feel difficult to fall asleep, SleepWell will provide options of sleeping music to help them fall
+  asleep quickly and improve their sleeping quality.
+
+## User Stories
+
+- As a user, I want to be able to add the everyday sleeping hours to a list
+- As a user, I want to be able to see a chart of everyday sleeping time
+- As a user, I want to be able to judge my daily sleeping quality by grading it from 1 to 3 point
+- As a user, I want to be able to see average time of everyday sleeping in given time interval
+- As a user, I want to be able to get a report about the sleeping quality and sleeping hours
+- As a user, I want to be able to set a timer to remind me the time to go to sleep
+- As a user, I want to be able to have options of sleeping music to help fall asleep
