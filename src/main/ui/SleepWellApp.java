@@ -3,8 +3,6 @@ package ui;
 import model.DataCollectionAndProcess;
 import model.OneDaySleep;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,24 +36,25 @@ public class SleepWellApp {
         switch (option) {
             case "1":
                 inputData();
-                System.out.println("Do you want to continue or quit?");
                 break;
             case "2":
                 getAverage();
                 break;
             case "3":
                 getReport();
-            default:
                 break;
         }
     }
 
+    @SuppressWarnings("methodlength")
     public void getReport() {
-        System.out.println("Input All, Period or Month to get report:q");
+        System.out.println("Input All, Period or Month to get report: ");
         String choose = scanner.nextLine();
         switch (choose) {
-            case "All" -> printList(this.dataCollectionAndProcess.getSleepDays());
-            case "Given" -> {
+            case "All":
+                printList(this.dataCollectionAndProcess.getSleepDays());
+                break;
+            case "Period":
                 System.out.println("Please input the time period to get report: \n Start month:");
                 int startMonth = scanner.nextInt();
                 System.out.println("Start date:");
@@ -65,12 +64,14 @@ public class SleepWellApp {
                 System.out.println("End date");
                 int endDate = scanner.nextInt();
                 printList(this.dataCollectionAndProcess.getReportForGiven(startMonth, startDate, endMonth, endDate));
-            }
-            case "Month" -> {
+                scanner.nextLine();
+                break;
+            case "Month":
                 System.out.println("Please input the month to get report:");
                 int month = scanner.nextInt();
                 printList(this.dataCollectionAndProcess.getReportForMonth(month));
-            }
+                scanner.nextLine();
+                break;
         }
     }
 
@@ -80,8 +81,8 @@ public class SleepWellApp {
             int date = oneDaySleep.getDate();
             double hour = oneDaySleep.getHour();
             int userGrade = oneDaySleep.getGrade();
-            int systemGrade = oneDaySleep.getSystemGrade();
-            System.out.println("Date:" + month + "'/'" + date
+            int systemGrade = oneDaySleep.systemGrading(hour);
+            System.out.println("Date:" + month + "/" + date
                     + "\n Sleeping Hour:" + hour
                     + "\n Your sleeping quality:" + userGrade
                     + "\n System Grade:" + systemGrade);
@@ -100,6 +101,7 @@ public class SleepWellApp {
         double averageHour = this.dataCollectionAndProcess.averageHourGivenDate(
                 startMonth, startDate, endMonth, endDate);
         System.out.println("The average hour is:" + averageHour);
+        scanner.nextLine();
     }
 
     public void inputData() {
@@ -119,7 +121,7 @@ public class SleepWellApp {
                         + "\n Date:" + date
                         + "\n Sleeping hour:" + hour
                         + "\n Your grade for sleeping quality:" + grade);
+        scanner.nextLine();
     }
-
-
 }
+
