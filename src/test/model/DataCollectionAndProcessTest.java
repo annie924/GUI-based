@@ -108,8 +108,6 @@ public class DataCollectionAndProcessTest {
         testDataCollectionAndProcess.addOneDaySleep(oneDaySleep);
         testDataCollectionAndProcess.addOneDaySleep(oneDaySleep2);
         testDataCollectionAndProcess.addOneDaySleep(oneDaySleep3);
-        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep4);
-        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep5);
         List <OneDaySleep> reportForGiven = testDataCollectionAndProcess.getReportForGiven(
                 9,23,9,25);
         assertEquals(3,reportForGiven.size());
@@ -117,6 +115,8 @@ public class DataCollectionAndProcessTest {
         assertEquals(oneDaySleep,reportForGiven.get(1));
         assertEquals(oneDaySleep2,reportForGiven.get(2));
 
+        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep4);
+        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep5);
         List <OneDaySleep> reportForGiven1 = testDataCollectionAndProcess.getReportForGiven(
                 9,22,10,28);
         assertEquals(5,reportForGiven1.size());
@@ -127,13 +127,10 @@ public class DataCollectionAndProcessTest {
         assertEquals(oneDaySleep5,reportForGiven1.get(4));
 
         List <OneDaySleep> reportForGiven2 = testDataCollectionAndProcess.getReportForGiven(
-                9,24,11,28);
-        assertEquals(5,reportForGiven2.size());
-        assertEquals(oneDaySleep,reportForGiven2.get(0));
-        assertEquals(oneDaySleep2,reportForGiven2.get(1));
-        assertEquals(oneDaySleep3,reportForGiven2.get(2));
-        assertEquals(oneDaySleep5,reportForGiven2.get(3));
-        assertEquals(oneDaySleep4,reportForGiven2.get(4));
+                9,27,11,27);
+        assertEquals(2,reportForGiven2.size());
+        assertEquals(oneDaySleep5,reportForGiven2.get(0));
+        assertEquals(oneDaySleep4,reportForGiven2.get(1));
     }
 
     @Test
@@ -145,5 +142,7 @@ public class DataCollectionAndProcessTest {
         assertEquals(oneDaySleep1.getSystemGrade(),testGrade);
         int testGrade1 = testDataCollectionAndProcess.getSystemGradeGivenDay(10,23);
         assertEquals(0,testGrade1);
+        int testGrade2 = testDataCollectionAndProcess.getSystemGradeGivenDay(9,28);
+        assertEquals(0,testGrade2);
     }
 }
