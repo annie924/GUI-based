@@ -31,8 +31,8 @@ public class DataCollectionAndProcess {
         for (OneDaySleep oneDaySleep : sleepGiven) {
             totalHour += oneDaySleep.getHour();
         }
-        double averageHour;
-        return averageHour = totalHour / givenDays;
+        double averageHour = totalHour / givenDays;
+        return averageHour;
     }
 
 

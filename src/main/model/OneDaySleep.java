@@ -24,20 +24,23 @@ public class OneDaySleep {
     }
 
 
-    // Requires: sleepHour >= 0, 1 <= point <= 3
+    // Requires: sleepHour > 0, 1 <= point <= 3
     // Modifies: this
     // Effects: judges the given sleepHour.
     // If 0 < sleepHour <= 4 then grade it to 1;
     // If 4 < sleepHour <= 7, then grade it to 2;
     // If sleepHour > 7, then grade it to 3;
+    // Otherwise, it is 0
     public int systemGrading(double gradeHour) {
         this.sleepHour = gradeHour;
         if (gradeHour > 0 && gradeHour <= 4) {
             this.systemGrade = 1;
         } else if (gradeHour > 4 && gradeHour <= 7) {
             this.systemGrade = 2;
-        } else {
+        } else if (gradeHour > 7) {
             this.systemGrade = 3;
+        } else {
+            this.systemGrade = 0;
         }
         return this.systemGrade;
     }

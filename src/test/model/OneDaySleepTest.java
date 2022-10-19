@@ -11,6 +11,7 @@ public class OneDaySleepTest {
     private OneDaySleep oneDaySleep2;
     private OneDaySleep oneDaySleep3;
     private OneDaySleep oneDaySleep4;
+    private OneDaySleep oneDaySleep5;
 
 
     @BeforeEach
@@ -20,6 +21,7 @@ public class OneDaySleepTest {
         oneDaySleep2 = new OneDaySleep(9,25,4.5,2);
         oneDaySleep3 = new OneDaySleep(9,26,7,2);
         oneDaySleep4 = new OneDaySleep(9,27,8,3);
+        oneDaySleep5 = new OneDaySleep(9,28,0,1);
     }
 
     @Test
@@ -52,6 +54,10 @@ public class OneDaySleepTest {
         double gradeHour4 = oneDaySleep4.getHour();
         oneDaySleep4.systemGrading(gradeHour4);
         assertEquals(3,oneDaySleep4.getSystemGrade());
+
+        double gradeHour5 = oneDaySleep5.getHour();
+        oneDaySleep5.systemGrading(gradeHour5);
+        assertEquals(0,oneDaySleep5.getSystemGrade());
 
     }
 
