@@ -131,6 +131,10 @@ public class DataCollectionAndProcessTest {
         assertEquals(2,reportForGiven2.size());
         assertEquals(oneDaySleep5,reportForGiven2.get(0));
         assertEquals(oneDaySleep4,reportForGiven2.get(1));
+
+        List<OneDaySleep> reportForGGiven3 = testDataCollectionAndProcess.getReportForGiven(
+                10,20,9,24);
+        assertEquals(0,reportForGGiven3.size());
     }
 
     @Test
