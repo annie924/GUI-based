@@ -134,7 +134,16 @@ public class DataCollectionAndProcessTest {
         assertEquals(oneDaySleep3,reportForGiven2.get(2));
         assertEquals(oneDaySleep5,reportForGiven2.get(3));
         assertEquals(oneDaySleep4,reportForGiven2.get(4));
+    }
 
-
+    @Test
+    public void testGetSystemGradeGivenDays() {
+        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep1);
+        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep);
+        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep2);
+        int testGrade = testDataCollectionAndProcess.getSystemGradeGivenDay(9,23);
+        assertEquals(oneDaySleep1.getSystemGrade(),testGrade);
+        int testGrade1 = testDataCollectionAndProcess.getSystemGradeGivenDay(10,23);
+        assertEquals(0,testGrade1);
     }
 }

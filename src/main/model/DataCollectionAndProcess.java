@@ -77,8 +77,21 @@ public class DataCollectionAndProcess {
         return givenSleepDays;
     }
 
+    public int getSystemGradeGivenDay(int month, int date) {
+        int systemGrade;
+        for (OneDaySleep oneDaySleep : this.sleepDays) {
+            if (month == oneDaySleep.getMonth() && date == oneDaySleep.getDate()) {
+                systemGrade = oneDaySleep.systemGrading(oneDaySleep.getHour());
+                return systemGrade;
+            }
+        }
+        return 0;
+    }
+
     // getters
     public List<OneDaySleep> getSleepDays() {
         return this.sleepDays;
     }
+
+
 }

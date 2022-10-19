@@ -3,28 +3,33 @@ package ui;
 import model.DataCollectionAndProcess;
 import model.OneDaySleep;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SleepWellApp {
-    private final DataCollectionAndProcess dataCollectionAndProcess = new DataCollectionAndProcess();
+    private DataCollectionAndProcess dataCollectionAndProcess = new DataCollectionAndProcess();
     private final Scanner scanner;
+    private int hour;
 
-    // sleep well application
+    // Effects: runs the sleep well application
     public SleepWellApp() {
-        scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
         selectToDo();
     }
 
+    // Effects: displays options to user
     public void selectToDo() {
         while (true) {
             System.out.println("Please select an option : \n"
                     + "[1] input sleeping data \n"
-                    + "[2] get average hour for given time interval \n"
-                    + "[3] get report for sleeping \n"
-                    + "[4] quit");
+                    + "[2] get system grade of for sleeping\n"
+                    + "[3] get average hour for given time interval \n"
+                    + "[4] get report for sleeping \n"
+                    + "[5] quit");
             String selectedOption = scanner.nextLine();
-            if (selectedOption.equals("4")) {
+            if (selectedOption.equals("5")) {
                 System.out.println("Thanks for using the SleepWell App!");
                 break;
             }
@@ -32,49 +37,91 @@ public class SleepWellApp {
         }
     }
 
+    // Requires: 1 <= option <= 5
+    // Effects: processes user input
     public void executeSelection(String option) {
         switch (option) {
             case "1":
                 inputData();
                 break;
             case "2":
-                getAverage();
+                getSystemGrade();
                 break;
             case "3":
+                getAverage();
+                break;
+            case "4":
                 getReport();
+                break;
+            default:
                 break;
         }
     }
 
-    @SuppressWarnings("methodlength")
+    // Effects: processes user input
+    private void getSystemGrade() {
+        System.out.println("You have already added data for these dates:"
+                + getDate()
+                + "\n Please input the date to see the system grade: \n month:");
+        int month = scanner.nextInt();
+        System.out.println("date:");
+        int date = scanner.nextInt();
+        if (this.dataCollectionAndProcess.getSystemGradeGivenDay(month,date) != 0) {
+            System.out.println("The system grade for" + " " + month + "/" + date + " " + "is:"
+                    + this.dataCollectionAndProcess.getSystemGradeGivenDay(month, date));
+            scanner.nextLine();
+        } else {
+            System.out.println("Given date is not in the list!");
+            scanner.nextLine();
+        }
+    }
+
+    // Effects: creates a date list for existing sleep days and returns the list
+    private List<String> getDate() {
+        List<String> dateList = new ArrayList<>();
+        for (OneDaySleep oneDaySleep : this.dataCollectionAndProcess.getSleepDays()) {
+            String date = oneDaySleep.getMonth() + "/" + oneDaySleep.getDate();
+            dateList.add(date);
+        }
+        return dateList;
+    }
+
+    // Requires: the input can only be "All", "Period" and "Month"
+    // Effects: processes user input
     public void getReport() {
-        System.out.println("Input All, Period or Month to get report: ");
+        System.out.println("Input 'All', 'Period' or 'Month' to get report:");
         String choose = scanner.nextLine();
         switch (choose) {
             case "All":
                 printList(this.dataCollectionAndProcess.getSleepDays());
                 break;
             case "Period":
-                System.out.println("Please input the time period to get report: \n Start month:");
-                int startMonth = scanner.nextInt();
-                System.out.println("Start date:");
-                int startDate = scanner.nextInt();
-                System.out.println("End month:");
-                int endMonth = scanner.nextInt();
-                System.out.println("End date");
-                int endDate = scanner.nextInt();
-                printList(this.dataCollectionAndProcess.getReportForGiven(startMonth, startDate, endMonth, endDate));
-                scanner.nextLine();
+                reportForPeriod();
                 break;
             case "Month":
                 System.out.println("Please input the month to get report:");
                 int month = scanner.nextInt();
                 printList(this.dataCollectionAndProcess.getReportForMonth(month));
-                scanner.nextLine();
+                break;
+            default:
                 break;
         }
     }
 
+    // Effects: process for user input
+    public void reportForPeriod() {
+        System.out.println("Please input the time period to get report: \n Start month:");
+        int startMonth = scanner.nextInt();
+        System.out.println("Start date:");
+        int startDate = scanner.nextInt();
+        System.out.println("End month:");
+        int endMonth = scanner.nextInt();
+        System.out.println("End date");
+        int endDate = scanner.nextInt();
+        printList(this.dataCollectionAndProcess.getReportForGiven(startMonth, startDate, endMonth, endDate));
+    }
+
+    // Effects: prints the list of existing sleeping data with month, date, hour, user grade and system grade
     public void printList(List<OneDaySleep> sleepDayList) {
         for (OneDaySleep oneDaySleep : sleepDayList) {
             int month = oneDaySleep.getMonth();
@@ -87,8 +134,10 @@ public class SleepWellApp {
                     + "\n Your sleeping quality:" + userGrade
                     + "\n System Grade:" + systemGrade);
         }
+        scanner.nextLine();
     }
 
+    // Effects: processes user input
     public void getAverage() {
         System.out.println("Please input the time interval to get average hour: \n Start month:");
         int startMonth = scanner.nextInt();
@@ -104,6 +153,7 @@ public class SleepWellApp {
         scanner.nextLine();
     }
 
+    // Effects: processes user input
     public void inputData() {
         System.out.println("Please input the month:");
         int month = scanner.nextInt();
@@ -124,4 +174,5 @@ public class SleepWellApp {
         scanner.nextLine();
     }
 }
+
 
