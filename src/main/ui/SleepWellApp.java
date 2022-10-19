@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class SleepWellApp {
     private DataCollectionAndProcess dataCollectionAndProcess = new DataCollectionAndProcess();
     private final Scanner scanner;
-    private int hour;
 
     // Effects: runs the sleep well application
     public SleepWellApp() {
