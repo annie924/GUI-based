@@ -155,4 +155,5 @@ public class DataCollectionAndProcessTest {
         int testGrade2 = testDataCollectionAndProcess.getSystemGradeGivenDay(9, 28);
         assertEquals(0, testGrade2);
     }
+
 }

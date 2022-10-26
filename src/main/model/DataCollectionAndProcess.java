@@ -59,9 +59,13 @@ public class DataCollectionAndProcess implements Writable {
     // Effects: gets a list of oneDaySleep of given time interval
     public List<OneDaySleep> getReportForGiven(int startMonth, int startDate, int endMonth, int endDate) {
         List<OneDaySleep> givenSleepDays = new ArrayList<>();
-        if (startMonth == endMonth) {
-            reportSameMonth(startMonth, startDate, endDate, givenSleepDays);
-        } else if (startMonth < endMonth) {
+        for (OneDaySleep oneDaySleep : this.sleepDays) {
+            if (startMonth == endMonth && startMonth == oneDaySleep.getMonth()
+                    && startDate <= oneDaySleep.getDate() && oneDaySleep.getDate() <= endDate) {
+                givenSleepDays.add(oneDaySleep);
+            }
+        }
+        if (startMonth < endMonth) {
             for (OneDaySleep oneDaySleep : this.sleepDays) {
                 if (oneDaySleep.getMonth() == startMonth && startDate <= oneDaySleep.getDate()) {
                     givenSleepDays.add(oneDaySleep);
@@ -76,19 +80,11 @@ public class DataCollectionAndProcess implements Writable {
                 }
             }
         }
+
         return givenSleepDays;
     }
 
-    public void reportSameMonth(
-            int startMonth, int startDate, int endDate, List<OneDaySleep> givenSleepDays) {
-        for (OneDaySleep oneDaySleep : this.sleepDays) {
-            if (startMonth == oneDaySleep.getMonth()
-                    && startDate <= oneDaySleep.getDate() && oneDaySleep.getDate() <= endDate) {
-                givenSleepDays.add(oneDaySleep);
-            }
-        }
-    }
-
+    // Effects: gets the system grade for given day in month and date
     public int getSystemGradeGivenDay(int month, int date) {
         int systemGrade;
         for (OneDaySleep oneDaySleep : this.sleepDays) {

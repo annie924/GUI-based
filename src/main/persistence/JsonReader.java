@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 // Represents a reader that reads SleepList from JSON data stored in file
@@ -21,7 +20,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads SleepList from file and returns it;
     // throws IOException if an error occurs reading data from file
     public DataCollectionAndProcess read() throws IOException {
         String jsonData = readFile(source);

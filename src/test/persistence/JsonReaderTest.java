@@ -2,7 +2,6 @@ package persistence;
 
 import model.DataCollectionAndProcess;
 import model.OneDaySleep;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class JsonReaderTest extends JsonTest{
         JsonReader reader = new JsonReader("./data/testReaderEmptySleepList.json");
         try {
             DataCollectionAndProcess sl = reader.read();
-            assertEquals("My Sleep List", sl.getName());
+            assertEquals("My sleep list", sl.getName());
             assertEquals(0, sl.numSleepDays());
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -39,7 +38,7 @@ public class JsonReaderTest extends JsonTest{
         JsonReader reader = new JsonReader("./data/testReaderGeneralSleepList.json");
         try {
             DataCollectionAndProcess sl = reader.read();
-            assertEquals("My Sleep List", sl.getName());
+            assertEquals("My sleep list", sl.getName());
             List<OneDaySleep> sleepLists = sl.getSleepDays();
             assertEquals(2, sleepLists.size());
             checkOneDaySleep(9, 24, 8, 2, sleepLists.get(0));

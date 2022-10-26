@@ -14,7 +14,7 @@ public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            DataCollectionAndProcess sl = new DataCollectionAndProcess("My Sleep List");
+            DataCollectionAndProcess sl = new DataCollectionAndProcess("My sleep list");
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -26,15 +26,15 @@ public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterEmptySleepList() {
         try {
-            DataCollectionAndProcess sl = new DataCollectionAndProcess("My Sleep List");
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
+            DataCollectionAndProcess sl = new DataCollectionAndProcess("My sleep list");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptySleepList.json");
             writer.open();
             writer.write(sl);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptySleepList.json");
             sl = reader.read();
-            assertEquals("My Sleep List", sl.getName());
+            assertEquals("My sleep list", sl.getName());
             assertEquals(0, sl.numSleepDays());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -44,17 +44,17 @@ public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterGeneraSleepList() {
         try {
-            DataCollectionAndProcess sl = new DataCollectionAndProcess("My Sleep List");
+            DataCollectionAndProcess sl = new DataCollectionAndProcess("My sleep list");
             sl.addOneDaySleep(new OneDaySleep(9,24,8,2));
             sl.addOneDaySleep(new OneDaySleep(9,25,5,1));
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralSleepList.json");
             writer.open();
             writer.write(sl);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralSleepList.json");
             sl = reader.read();
-            assertEquals("My Sleep List", sl.getName());
+            assertEquals("My sleep list", sl.getName());
             List<OneDaySleep> sleepLists = sl.getSleepDays();
             assertEquals(2, sleepLists.size());
             checkOneDaySleep(9,24,8,2, sleepLists.get(0));
