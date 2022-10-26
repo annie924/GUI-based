@@ -1,14 +1,20 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a list of oneDaySleep data, calculates the average hours and gives a report
-public class DataCollectionAndProcess {
+public class DataCollectionAndProcess implements Writable {
+    private String name;
     private List<OneDaySleep> sleepDays;
 
     // Effects: constructs an empty collection of sleepDays
-    public DataCollectionAndProcess() {
+    public DataCollectionAndProcess(String name) {
+        this.name = name;
         this.sleepDays = new ArrayList<>();
     }
 
@@ -26,7 +32,7 @@ public class DataCollectionAndProcess {
     // Effects: calculates average hour for given date interval
     public double averageHourGivenDate(int startMonth, int startDate, int endMonth, int endDate) {
         double totalHour = 0.0;
-        List<OneDaySleep> sleepGiven = getReportForGiven(startMonth,startDate,endMonth,endDate);
+        List<OneDaySleep> sleepGiven = getReportForGiven(startMonth, startDate, endMonth, endDate);
         double givenDays = sleepGiven.size();
         for (OneDaySleep oneDaySleep : sleepGiven) {
             totalHour += oneDaySleep.getHour();
@@ -54,11 +60,7 @@ public class DataCollectionAndProcess {
     public List<OneDaySleep> getReportForGiven(int startMonth, int startDate, int endMonth, int endDate) {
         List<OneDaySleep> givenSleepDays = new ArrayList<>();
         if (startMonth == endMonth) {
-            for (OneDaySleep oneDaySleep : this.sleepDays) {
-                if (startDate <= oneDaySleep.getDate() && oneDaySleep.getDate() <= endDate) {
-                    givenSleepDays.add(oneDaySleep);
-                }
-            }
+            reportSameMonth(startMonth, startDate, endDate, givenSleepDays);
         } else if (startMonth < endMonth) {
             for (OneDaySleep oneDaySleep : this.sleepDays) {
                 if (oneDaySleep.getMonth() == startMonth && startDate <= oneDaySleep.getDate()) {
@@ -77,6 +79,16 @@ public class DataCollectionAndProcess {
         return givenSleepDays;
     }
 
+    public void reportSameMonth(
+            int startMonth, int startDate, int endDate, List<OneDaySleep> givenSleepDays) {
+        for (OneDaySleep oneDaySleep : this.sleepDays) {
+            if (startMonth == oneDaySleep.getMonth()
+                    && startDate <= oneDaySleep.getDate() && oneDaySleep.getDate() <= endDate) {
+                givenSleepDays.add(oneDaySleep);
+            }
+        }
+    }
+
     public int getSystemGradeGivenDay(int month, int date) {
         int systemGrade;
         for (OneDaySleep oneDaySleep : this.sleepDays) {
@@ -93,5 +105,31 @@ public class DataCollectionAndProcess {
         return this.sleepDays;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public int numSleepDays() {
+        return sleepDays.size();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("sleep data", sleepListToJson());
+        return json;
+    }
+
+    // EFFECTS: returns oneDaySleep in the sleepList as a JSON array
+    private JSONArray sleepListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (OneDaySleep t : sleepDays) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+

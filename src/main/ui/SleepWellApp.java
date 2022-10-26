@@ -2,19 +2,29 @@ package ui;
 
 import model.DataCollectionAndProcess;
 import model.OneDaySleep;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SleepWellApp {
-    private DataCollectionAndProcess dataCollectionAndProcess = new DataCollectionAndProcess();
+    private static final String JSON_STORE = "./data/SleepList.json";
+    private DataCollectionAndProcess dataCollectionAndProcess;
     private final Scanner scanner;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Effects: runs the sleep well application
     public SleepWellApp() {
         this.scanner = new Scanner(System.in);
+        dataCollectionAndProcess = new DataCollectionAndProcess("My sleep list");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         selectToDo();
     }
 
@@ -26,9 +36,11 @@ public class SleepWellApp {
                     + "[2] get system grade of for sleeping\n"
                     + "[3] get average hour for given time interval \n"
                     + "[4] get report for sleeping \n"
-                    + "[5] quit");
+                    + "[5] save input data to file \n"
+                    + "[6] load data from file \n"
+                    + "[7] quit");
             String selectedOption = scanner.nextLine();
-            if (selectedOption.equals("5")) {
+            if (selectedOption.equals("7")) {
                 System.out.println("Thanks for using the SleepWell App!");
                 break;
             }
@@ -36,7 +48,7 @@ public class SleepWellApp {
         }
     }
 
-    // Requires: 1 <= option <= 5
+    // Requires: option can not be empty string
     // Effects: processes user input
     public void executeSelection(String option) {
         switch (option) {
@@ -52,7 +64,14 @@ public class SleepWellApp {
             case "4":
                 getReport();
                 break;
+            case "5":
+                saveSleepList();
+                break;
+            case "6":
+                loadSleepList();
+                break;
             default:
+                System.out.println("Selection is not valid, try again!");
                 break;
         }
     }
@@ -101,6 +120,7 @@ public class SleepWellApp {
                 System.out.println("Please input the month to get report:");
                 int month = scanner.nextInt();
                 printList(this.dataCollectionAndProcess.getReportForMonth(month));
+                scanner.nextLine();
                 break;
             default:
                 break;
@@ -118,6 +138,7 @@ public class SleepWellApp {
         System.out.println("End date");
         int endDate = scanner.nextInt();
         printList(this.dataCollectionAndProcess.getReportForGiven(startMonth, startDate, endMonth, endDate));
+        scanner.nextLine();
     }
 
     // Effects: prints the list of existing sleeping data with month, date, hour, user grade and system grade
@@ -133,7 +154,6 @@ public class SleepWellApp {
                     + "\n Your sleeping quality:" + userGrade
                     + "\n System Grade:" + systemGrade);
         }
-        scanner.nextLine();
     }
 
     // Effects: processes user input
@@ -171,6 +191,32 @@ public class SleepWellApp {
                         + "\n Sleeping hour:" + hour
                         + "\n Your grade for sleeping quality:" + grade);
         scanner.nextLine();
+    }
+
+    /*
+    citation
+     */
+    // EFFECTS: saves the sleep list to file
+    private void saveSleepList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(dataCollectionAndProcess);
+            jsonWriter.close();
+            System.out.println("Saved " + dataCollectionAndProcess.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads sleep list from file
+    private void loadSleepList() {
+        try {
+            dataCollectionAndProcess = jsonReader.read();
+            System.out.println("Loaded " + dataCollectionAndProcess.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
 

@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.List;
 
 // Represents a collection of all the data for one-date sleep that has
 // a month, date, hour, userGrade and systemGrade
-public class OneDaySleep {
+public class OneDaySleep implements Writable {
     private double sleepHour;
     private final int grade;
     private int systemGrade;
@@ -64,5 +67,15 @@ public class OneDaySleep {
 
     public int getSystemGrade() {
         return this.systemGrade;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("month", month);
+        json.put("date", date);
+        json.put("sleep hour", sleepHour);
+        json.put("user grade", grade);
+        return json;
     }
 }

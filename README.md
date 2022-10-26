@@ -15,10 +15,10 @@ It can meet people's different needs for sleep:
 
 ## User Stories
 
-- As a user, I want to be able to add the everyday sleeping data including month, date and sleep hour to a list
-- As a user, I want to be able to see a chart of sleeping data
-- As a user, I want to be able to judge my daily sleeping quality by grading it from 1 to 3 point and add it to the list
+- As a user, I want to be able to add the everyday sleeping data including month, date，sleep hour and  
+grade of daily sleeping quality from 1 to 3 point to a list
+- As a user, I want to be able to see a report of input sleeping data
 - As a user, I want to be able to see average hour of everyday sleeping in given time interval
-- As a user, I want to be able to get a system grade about everyday sleeping quality 
-- As a user, I want to be able to set a timer to remind me the time to go to sleep
-- As a user, I want to be able to have options of sleeping music to help fall asleep
+- As a user, I want to be able to get a system grade about everyday sleeping quality
+- As a user, I want to be able to save my everyday sleeping data list to file
+- As a user, I want to be able to load my sleeping data list from file
