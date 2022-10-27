@@ -10,6 +10,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**********
+ * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ * cite the JsonWriterTest class written by CPSC 210 instructor
+ **********/
 public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {

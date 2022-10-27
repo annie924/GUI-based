@@ -113,6 +113,14 @@ public class DataCollectionAndProcessTest {
         assertEquals(oneDaySleep, reportForGiven.get(1));
         assertEquals(oneDaySleep2, reportForGiven.get(2));
 
+        List<OneDaySleep> reportForGiven4 = testDataCollectionAndProcess.getReportForGiven(
+                9, 1, 9, 22);
+        assertEquals(0,reportForGiven4.size());
+
+        List<OneDaySleep> reportForGiven5 = testDataCollectionAndProcess.getReportForGiven(
+                9, 27, 9, 30);
+        assertEquals(0,reportForGiven5.size());
+
         testDataCollectionAndProcess.addOneDaySleep(oneDaySleep5);
         List<OneDaySleep> reportForGiven0 = testDataCollectionAndProcess.getReportForGiven(
                 9, 1, 9, 30);

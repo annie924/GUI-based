@@ -69,6 +69,10 @@ public class OneDaySleep implements Writable {
         return this.systemGrade;
     }
 
+    /**********
+     * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+     * cite the toJson method in Thingy class written by CPSC 210 instructor
+     **********/
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

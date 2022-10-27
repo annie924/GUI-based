@@ -9,6 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**********
+ * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ * cite the JsonReaderTest class written by CPSC 210 instructor
+ **********/
 public class JsonReaderTest extends JsonTest{
     @Test
     void testReaderNonExistentFile() {

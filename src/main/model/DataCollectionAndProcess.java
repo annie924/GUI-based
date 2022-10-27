@@ -109,16 +109,24 @@ public class DataCollectionAndProcess implements Writable {
         return sleepDays.size();
     }
 
+    /**********
+     * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+     * cite the toJson method in WorkRoom class written by CPSC 210 instructor
+     **********/
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
-        json.put("sleep data", sleepListToJson());
+        json.put("sleep data", sleepDaysToJson());
         return json;
     }
 
-    // EFFECTS: returns oneDaySleep in the sleepList as a JSON array
-    private JSONArray sleepListToJson() {
+    /**********
+     * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+     * cite the thingiesToJson method in WorkRoom class written by CPSC 210 instructor
+     **********/
+    // EFFECTS: returns oneDaySleep in the sleepDays as a JSON array
+    private JSONArray sleepDaysToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (OneDaySleep t : sleepDays) {

@@ -193,10 +193,11 @@ public class SleepWellApp {
         scanner.nextLine();
     }
 
-    /*
-    citation
-     */
-    // EFFECTS: saves the sleep list to file
+    /*********
+     * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+     * cite the saveWorkRoom method in WorkRoomApp class written by CPSC 210 instructor
+     *********/
+    // EFFECTS: saves the sleepList to file
     private void saveSleepList() {
         try {
             jsonWriter.open();
@@ -208,8 +209,12 @@ public class SleepWellApp {
         }
     }
 
+    /**********
+     * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+     * cite the loadWorkRoom method in WorkRoomApp class written by CPSC 210 instructor
+     **********/
     // MODIFIES: this
-    // EFFECTS: loads sleep list from file
+    // EFFECTS: loads sleepList from file
     private void loadSleepList() {
         try {
             dataCollectionAndProcess = jsonReader.read();

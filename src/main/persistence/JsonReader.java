@@ -20,6 +20,10 @@ public class JsonReader {
         this.source = source;
     }
 
+    /**********
+     * Citation URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+     * cite the method JsonReader, read, readFile in JsonReader class written by CPSC 210 instructor
+     **********/
     // EFFECTS: reads SleepList from file and returns it;
     // throws IOException if an error occurs reading data from file
     public DataCollectionAndProcess read() throws IOException {
@@ -48,7 +52,7 @@ public class JsonReader {
     }
 
     // MODIFIES: sl
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses oneDaySleeps from JSON object and adds them to sleepList
     private void addSleepLists(DataCollectionAndProcess sl, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("sleep data");
         for (Object json : jsonArray) {
@@ -58,7 +62,7 @@ public class JsonReader {
     }
 
     // MODIFIES: sl
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // EFFECTS: parses oneDaySleep from JSON object and adds it to sleepList
     private void addSleepList(DataCollectionAndProcess sl, JSONObject jsonObject) {
         int month = jsonObject.getInt("month");
         int date = jsonObject.getInt("date");
