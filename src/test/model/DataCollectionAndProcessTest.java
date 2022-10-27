@@ -146,9 +146,11 @@ public class DataCollectionAndProcessTest {
         assertEquals(oneDaySleep5, reportForGiven2.get(0));
         assertEquals(oneDaySleep4, reportForGiven2.get(1));
 
-        List<OneDaySleep> reportForGGiven3 = testDataCollectionAndProcess.getReportForGiven(
-                10, 20, 9, 24);
-        assertEquals(0, reportForGGiven3.size());
+        List<OneDaySleep> reportForGiven3 = testDataCollectionAndProcess.getReportForGiven(
+                9, 27, 11, 26);
+        assertEquals(1,reportForGiven3.size());
+        assertEquals(oneDaySleep5, reportForGiven3.get(0));
+
     }
 
     @Test
