@@ -24,3 +24,13 @@ and month data
 - As a user, I want to be able to save my everyday sleeping data list including month, date, sleep hour and grade
 of daily sleeping quality to file
 - As a user, I want to be able to load my sleeping data list from file
+
+## Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by clicking the button labelled "Add Data"
+- You can generate the second required event related to adding Xs to a Y by selecting the menu item labelled "Report" and selecting
+item labelled "Report All" to get all data input and another item labelled "Month Report" to get report for given month
+- You can locate my visual component by opening the program
+- You can save the state of my application by selecting menu item labelled "File" and then selecting item labelled "Save"
+- You can reload the state of my application by selecting menu item labelled "File" and then selecting item labelled "Load"
+and you would see the loading data in the main frame
