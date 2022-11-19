@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+// Represents the GUI of SleepWellApp
 public class SleepUI extends JFrame {
     private JWindow window;
     private JButton addButton;
@@ -35,12 +35,13 @@ public class SleepUI extends JFrame {
     private JList list;
     private DefaultListModel listModel;
 
+    // Constructs a GUI
     public SleepUI() {
         frame = new JFrame("SleepWell");
-        frame.setSize(600, 600);
+        frame.setSize(700, 700);
         frame.setLayout(new FlowLayout());
         frame.setLocationRelativeTo(null);
-        frame.getContentPane().setBackground(Color.pink);
+        frame.getContentPane().setBackground(Color.lightGray);
 
         dataCollectionAndProcess = new DataCollectionAndProcess("Sleep List");
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -50,6 +51,7 @@ public class SleepUI extends JFrame {
         list = new JList<>(listModel);
         list.setBounds(160, 140, 300, 300);
         frame.add(list);
+
 
         createWindow();
         createMenu();
@@ -63,6 +65,7 @@ public class SleepUI extends JFrame {
 
     }
 
+    // Effects: create label on main frame
     public void createLabel() {
         JLabel l1 = new JLabel("Month:");
         JLabel l2 = new JLabel("Date:");
@@ -78,7 +81,7 @@ public class SleepUI extends JFrame {
         frame.add(l4);
     }
 
-    // Effects: create entry field to input sleep data
+    // Effects: create entry field to input sleep data on main frame
     protected void createEntryFields() {
         textFieldMonth = new JTextField();
         textFieldDate = new JTextField();
@@ -96,6 +99,7 @@ public class SleepUI extends JFrame {
 
     }
 
+    // Effects: create button to add data on main frame
     private void createButton() {
         addButton = new JButton("Add data");
         addButton.setBounds(40, 460, 120, 60);
@@ -103,6 +107,7 @@ public class SleepUI extends JFrame {
 
     }
 
+    // Effects: create menu bar and menu on main frame
     private void createMenu() {
         bar = new JMenuBar();
         menu = new JMenu("Report");
@@ -121,6 +126,7 @@ public class SleepUI extends JFrame {
         frame.setJMenuBar(bar);
     }
 
+    // Effects: create open window for GUI
     public void createWindow() {
         window = new JWindow();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -130,14 +136,14 @@ public class SleepUI extends JFrame {
         window.setBounds(((int) d.getWidth() - 900) / 2, ((int) d.getHeight() - 700) / 2, 995, 632);
         window.setVisible(true);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         window.setVisible(false);
     }
 
-
+    // Effects: constructs action event for adding-data button
     private class AddDataAction implements ActionListener {
         private String month;
         private String date;
@@ -176,6 +182,7 @@ public class SleepUI extends JFrame {
         }
     }
 
+    // Effects: constructs action events for report menu
     private class ReportForAll extends AbstractAction {
         private JFrame popFrame;
 
@@ -189,11 +196,13 @@ public class SleepUI extends JFrame {
             popFrame.setBounds(150, 150, 500, 300);
             if (e.getSource() == item) {
                 print();
+                popFrame.setLocationRelativeTo(null);
                 popFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
                 popFrame.setVisible(true);
             }
         }
 
+        // Effects: print the report
         public void print() {
             String month;
             String date;
@@ -218,9 +227,9 @@ public class SleepUI extends JFrame {
         }
     }
 
+    // Effects: constructs action events for report menu
     private class MonthReport extends AbstractAction {
         private JFrame monthFrame;
-        private JDialog dialog;
         private JButton report;
         private JTextField monthField;
         private JList monthList;
@@ -235,36 +244,43 @@ public class SleepUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == item1) {
                 setFrame();
+
+                monthFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                monthFrame.setVisible(true);
             }
         }
 
+        // Effects: set the frame to show the report
         public void setFrame() {
             monthFrame = new JFrame("Report");
             monthFrame.setSize(600, 600);
-            monthFrame.getContentPane().setBackground(Color.cyan);
-
-            monthField = new JTextField();
-            monthField.setBounds(40, 160, 40, 40);
-
-            report = new JButton("Get Report");
-            report.setBounds(60, 220, 90, 40);
-            report.addActionListener(new ReportListener());
+            monthFrame.setLayout(null);
+            monthFrame.getContentPane().setBackground(Color.lightGray);
+            monthFrame.setLocationRelativeTo(null);
 
             label = new JLabel("Enter month");
-            label.setBounds(40, 140, 80, 10);
+            label.setBounds(40, 100, 80, 10);
+            monthFrame.add(label);
+
+            monthField = new JTextField();
+            monthField.setBounds(60, 120, 80, 40);
+            monthFrame.add(monthField);
+
+            report = new JButton("Get Report");
+            report.setBounds(40, 180, 90, 40);
+            report.addActionListener(new ReportListener());
+            monthFrame.add(report);
 
             monthModel = new DefaultListModel();
             monthList = new JList<>(monthModel);
-            monthList.setBounds(160, 140, 400, 300);
-
+            monthList.setBounds(170, 100, 400, 400);
             monthFrame.add(monthList);
-            monthFrame.add(report);
-            monthFrame.add(label);
-            monthFrame.add(monthField);
-            monthFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
-            monthFrame.setVisible(true);
+
+
+
         }
 
+        // Effects: constructs action events for get reports button
         private class ReportListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -274,6 +290,7 @@ public class SleepUI extends JFrame {
             }
         }
 
+        // Effects: prints the input data in list
         public void print() {
             String month;
             String date;
@@ -293,12 +310,12 @@ public class SleepUI extends JFrame {
                                 + grade + ", System Grade: " + systemGrade);
             }
 
-            textFieldMonth.requestFocusInWindow();
-            textFieldMonth.setText("");
+            monthField.requestFocusInWindow();
+            monthField.setText("");
         }
     }
 
-
+    // Effects: constructs action events for save menu to save input data
     private class SaveAction extends AbstractAction {
 
         public SaveAction() {
@@ -322,6 +339,7 @@ public class SleepUI extends JFrame {
         }
     }
 
+    // Effects: constructs action events for load menu to load data from file
     private class LoadAction extends AbstractAction {
 
         LoadAction() {
