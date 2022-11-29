@@ -1,6 +1,8 @@
 package ui;
 
 import model.DataCollectionAndProcess;
+import model.Event;
+import model.EventLog;
 import model.OneDaySleep;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 
 // Represents the GUI of SleepWellApp
 public class SleepUI extends JFrame {
@@ -58,6 +61,7 @@ public class SleepUI extends JFrame {
         createEntryFields();
         createLabel();
         createButton();
+        frame.addWindowListener(new WindowCloseEvent());
         addButton.addActionListener(new AddDataAction());
         frame.setLayout(null);
         frame.setVisible(true);
@@ -130,7 +134,7 @@ public class SleepUI extends JFrame {
     public void createWindow() {
         window = new JWindow();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        Icon img = new ImageIcon(this.getClass().getResource("WechatIMG9772.jpeg"));
+        Icon img = new ImageIcon("./data/WechatIMG9772.jpeg");
         JLabel label = new JLabel(img);
         window.getContentPane().add(label);
         window.setBounds(((int) d.getWidth() - 900) / 2, ((int) d.getHeight() - 700) / 2, 995, 632);
@@ -143,7 +147,7 @@ public class SleepUI extends JFrame {
         window.setVisible(false);
     }
 
-    // Effects: constructs action event for adding-data button
+
     private class AddDataAction implements ActionListener {
         private String month;
         private String date;
@@ -151,9 +155,9 @@ public class SleepUI extends JFrame {
         private int grade;
 
         public AddDataAction() {
-
         }
 
+        // Effects: constructs action event for adding-data button
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addButton) {
@@ -280,7 +284,7 @@ public class SleepUI extends JFrame {
 
         }
 
-        // Effects: constructs action events for get reports button
+        // Constructs action events for get reports button
         private class ReportListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -315,7 +319,7 @@ public class SleepUI extends JFrame {
         }
     }
 
-    // Effects: constructs action events for save menu to save input data
+    // Constructs action events for save menu to save input data
     private class SaveAction extends AbstractAction {
 
         public SaveAction() {
@@ -327,6 +331,7 @@ public class SleepUI extends JFrame {
             saveSleepList();
         }
 
+        // Effects: save button event
         private void saveSleepList() {
             try {
                 jsonWriter.open();
@@ -339,7 +344,7 @@ public class SleepUI extends JFrame {
         }
     }
 
-    // Effects: constructs action events for load menu to load data from file
+    // Constructs action events for load menu to load data from file
     private class LoadAction extends AbstractAction {
 
         LoadAction() {
@@ -351,6 +356,7 @@ public class SleepUI extends JFrame {
             loadSleepList();
         }
 
+        // Effects: load button event
         private void loadSleepList() {
             try {
                 dataCollectionAndProcess = jsonReader.read();
@@ -366,6 +372,45 @@ public class SleepUI extends JFrame {
             } catch (IOException e) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
+        }
+    }
+
+    private class WindowCloseEvent implements WindowListener {
+        private LogPrinter lp;
+
+        @Override
+        public void windowOpened(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            lp = new ConsolePrinter();
+            lp.printLog(EventLog.getInstance());
+        }
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowActivated(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+
         }
     }
 }

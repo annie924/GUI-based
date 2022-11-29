@@ -34,3 +34,8 @@ item labelled "Report All" to get all data input and another item labelled "Mont
 - You can save the state of my application by selecting menu item labelled "File" and then selecting item labelled "Save"
 - You can reload the state of my application by selecting menu item labelled "File" and then selecting item labelled "Load"
 and you would see the loading data in the main frame
+
+## Phase 4: Task 2
+
+Mon Nov 28 17:44:56 PST 2022\
+One day sleep data added to sleep list: Month: 9, Date: 25, Hour: 6.0, Grade: 2

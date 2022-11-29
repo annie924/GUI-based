@@ -24,6 +24,9 @@ public class DataCollectionAndProcess implements Writable {
     // Effects: adds a new oneDaySleep to the collection of sleepDays to be completed
     public void addOneDaySleep(OneDaySleep oneDaySleep) {
         this.sleepDays.add(oneDaySleep);
+        String s = "Month: " + oneDaySleep.getMonth() + ", Date: " + oneDaySleep.getDate()
+                + ", Hour: " + oneDaySleep.getHour() + ", Grade: " + oneDaySleep.getGrade();
+        EventLog.getInstance().logEvent(new Event("One day sleep data added to sleep list: " + s));
     }
 
     // Requires: 1 <= startDate <= 31, 1 <= endDate <= 31, 1 <= startMonth <= 12,1 <= endMonth <= 12
