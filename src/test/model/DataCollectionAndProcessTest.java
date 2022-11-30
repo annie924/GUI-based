@@ -42,6 +42,10 @@ public class DataCollectionAndProcessTest {
         List<OneDaySleep> testSleepDays = testDataCollectionAndProcess.getSleepDays();
         assertEquals(1, testSleepDays.size());
         assertEquals(oneDaySleep, testSleepDays.get(0));
+        String s = "Month: " + oneDaySleep.getMonth() + ", Date: " + oneDaySleep.getDate()
+                + ", Hour: " + oneDaySleep.getHour() + ", Grade: " + oneDaySleep.getGrade();
+        Event event = new Event("One day sleep data added to sleep list: " + s);
+        assertEquals("One day sleep data added to sleep list: " + s,event.getDescription());
     }
 
     @Test

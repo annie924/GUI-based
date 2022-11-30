@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 
 // Represents the GUI of SleepWellApp
 public class SleepUI extends JFrame {
@@ -361,14 +360,14 @@ public class SleepUI extends JFrame {
             try {
                 dataCollectionAndProcess = jsonReader.read();
                 System.out.println("Loaded " + dataCollectionAndProcess.getName() + " from " + JSON_STORE);
-                for (OneDaySleep ods : dataCollectionAndProcess.getSleepDays()) {
-                    int month = ods.getMonth();
-                    int date = ods.getDate();
-                    Double hour = ods.getHour();
-                    int grade = ods.getGrade();
-                    String s = "Month: " + month + ", Date: " + date + ", Hour: " + hour + ", Grade: " + grade;
-                    listModel.addElement(s);
-                }
+//                for (OneDaySleep ods : dataCollectionAndProcess.getSleepDays()) {
+//                    int month = ods.getMonth();
+//                    int date = ods.getDate();
+//                    Double hour = ods.getHour();
+//                    int grade = ods.getGrade();
+//                    String s = "Month: " + month + ", Date: " + date + ", Hour: " + hour + ", Grade: " + grade;
+//                    listModel.addElement(s);
+//                }
             } catch (IOException e) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }

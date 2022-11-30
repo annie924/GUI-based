@@ -54,6 +54,7 @@ public class DataCollectionAndProcess implements Writable {
                 givenMonthSleep.add(oneDaySleep);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Get report for month: " + reportMonth));
         return givenMonthSleep;
     }
 
@@ -101,6 +102,7 @@ public class DataCollectionAndProcess implements Writable {
 
     // getters
     public List<OneDaySleep> getSleepDays() {
+        EventLog.getInstance().logEvent(new Event("Get report for all data"));
         return this.sleepDays;
     }
 

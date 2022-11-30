@@ -38,4 +38,8 @@ and you would see the loading data in the main frame
 ## Phase 4: Task 2
 
 Mon Nov 28 17:44:56 PST 2022\
-One day sleep data added to sleep list: Month: 9, Date: 25, Hour: 6.0, Grade: 2
+One day sleep data added to sleep list: Month: 9, Date: 25, Hour: 6.0, Grade: 2\
+Wed Nov 30 13:08:59 PST 2022\
+Get report for month: 11\
+Wed Nov 30 13:33:23 PST 2022\
+Get report for all data
