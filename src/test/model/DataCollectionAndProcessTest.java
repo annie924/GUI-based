@@ -42,10 +42,6 @@ public class DataCollectionAndProcessTest {
         List<OneDaySleep> testSleepDays = testDataCollectionAndProcess.getSleepDays();
         assertEquals(1, testSleepDays.size());
         assertEquals(oneDaySleep, testSleepDays.get(0));
-        String s = "Month: " + oneDaySleep.getMonth() + ", Date: " + oneDaySleep.getDate()
-                + ", Hour: " + oneDaySleep.getHour() + ", Grade: " + oneDaySleep.getGrade();
-        Event event = new Event("One day sleep data added to sleep list: " + s);
-        assertEquals("One day sleep data added to sleep list: " + s,event.getDescription());
     }
 
     @Test
@@ -170,4 +166,28 @@ public class DataCollectionAndProcessTest {
         assertEquals(0, testGrade2);
     }
 
+    @Test
+    public void testEventLogForAdd() {
+        testDataCollectionAndProcess.addOneDaySleep(oneDaySleep);
+        String s = "Month: " + oneDaySleep.getMonth() + ", Date: " + oneDaySleep.getDate()
+                + ", Hour: " + oneDaySleep.getHour() + ", Grade: " + oneDaySleep.getGrade();
+        Event event = new Event("One day sleep data added to sleep list: " + s);
+        assertEquals("One day sleep data added to sleep list: Month: 9, Date: 24, Hour: 3.8, Grade: 1"
+                ,event.getDescription());
+
+    }
+
+    @Test
+    public void testEventLogForReportAll() {
+        testDataCollectionAndProcess.getSleepDays();
+        Event event = new Event("Get report for all data");
+        assertEquals("Get report for all data", event.getDescription());
+    }
+
+    @Test
+    public void testEventLogForReportMonth() {
+        testDataCollectionAndProcess.getReportForMonth(9);
+        Event event = new Event("Get report for month: 9");
+        assertEquals("Get report for month: 9", event.getDescription());
+    }
 }
