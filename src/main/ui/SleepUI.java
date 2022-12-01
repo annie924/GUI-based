@@ -1,7 +1,6 @@
 package ui;
 
 import model.DataCollectionAndProcess;
-import model.Event;
 import model.EventLog;
 import model.OneDaySleep;
 import persistence.JsonReader;
@@ -13,7 +12,7 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-// Represents the GUI of SleepWellApp
+// Represents the GUI
 public class SleepUI extends JFrame {
     private JWindow window;
     private JButton addButton;
@@ -31,11 +30,12 @@ public class SleepUI extends JFrame {
     private JMenuItem save;
     private JMenuItem load;
     private static final String JSON_STORE = "./data/SleepList.json";
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
-    private DataCollectionAndProcess dataCollectionAndProcess;
     private JList list;
     private DefaultListModel listModel;
+
+    private DataCollectionAndProcess dataCollectionAndProcess;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Constructs a GUI
     public SleepUI() {
@@ -146,7 +146,7 @@ public class SleepUI extends JFrame {
         window.setVisible(false);
     }
 
-
+    // Represents add data button action
     private class AddDataAction implements ActionListener {
         private String month;
         private String date;
@@ -185,7 +185,7 @@ public class SleepUI extends JFrame {
         }
     }
 
-    // Effects: constructs action events for report menu
+    // Represents action events for report all item
     private class ReportForAll extends AbstractAction {
         private JFrame popFrame;
 
@@ -193,6 +193,7 @@ public class SleepUI extends JFrame {
             super("Report All");
         }
 
+        // Effects: constructs action for report all item
         @Override
         public void actionPerformed(ActionEvent e) {
             popFrame = new JFrame("Report");
@@ -230,7 +231,7 @@ public class SleepUI extends JFrame {
         }
     }
 
-    // Effects: constructs action events for report menu
+    // Represents action events for report for month item
     private class MonthReport extends AbstractAction {
         private JFrame monthFrame;
         private JButton report;
@@ -243,6 +244,7 @@ public class SleepUI extends JFrame {
             super("Month Report");
         }
 
+        // Effects: constructs action for month report item
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == item1) {
@@ -283,7 +285,7 @@ public class SleepUI extends JFrame {
 
         }
 
-        // Constructs action events for get reports button
+        // Represents action events for get reports in month report frame
         private class ReportListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -293,7 +295,7 @@ public class SleepUI extends JFrame {
             }
         }
 
-        // Effects: prints the input data in list
+        // Effects: prints the data in list
         public void print() {
             String month;
             String date;
@@ -374,6 +376,7 @@ public class SleepUI extends JFrame {
         }
     }
 
+    // Represents window action
     private class WindowCloseEvent implements WindowListener {
         private LogPrinter lp;
 
@@ -382,6 +385,7 @@ public class SleepUI extends JFrame {
 
         }
 
+        // Effects: prints the events in EventLog when closing the app
         @Override
         public void windowClosing(WindowEvent e) {
             lp = new ConsolePrinter();

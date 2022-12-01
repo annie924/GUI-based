@@ -43,3 +43,11 @@ Wed Nov 30 13:08:59 PST 2022\
 Get report for month: 11\
 Wed Nov 30 13:33:23 PST 2022\
 Get report for all data
+
+## Phase 4: Task 3
+
+As we can see in my UML class diagram, there are three packages: model,persistence and ui. In the model package, if time allowed,
+I want to separate DataCollectionAndProcess into three parts: get report, get average and get system grade. And these three parts will 
+extend the DataCollectionAndProcess. In this way, the relationship between the classes and methods will be more clear. I also want to add
+exceptions in these classes to make the code perfectly run.
+
